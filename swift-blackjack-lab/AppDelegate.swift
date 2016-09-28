@@ -13,29 +13,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var window: UIWindow?
     
-    /**
-     
-     * Declare any custom properties here.
-     
-     */
+    var dealer: Dealer = Dealer()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        /*
-         
-         * Call your custom classes here when running the scheme.
-         
-         */
+    
         
         // Do not alter
         return true  //
     }   ///////////////
     
-    /*
-     
-     * Write your playBlackjack method in here
-     
-     */
+    func playBlackjack(withBet amount: UInt) {
+        dealer.deck.shuffle()
+        dealer.deal()
+        if dealer.placeBet(amount) {
+            while dealer.winner() != "no" {
+                dealer.turn(dealer.player)
+                dealer.turn(dealer.house)
+            }
+        }
+    }
     
 }
 
